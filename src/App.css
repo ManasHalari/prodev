@@ -21,26 +21,14 @@ body {
   background: #f0f0f0;
 }
 
-.table {
-  width: 100%;
-  border-collapse: collapse;
-  background: white;
-}
-
-.table th,
-.table td {
-  border: 1px solid #ddd;
-  padding: 8px;
-}
-
-.table th {
-  background: #f0f0f0;
-}
-
 .input {
-  width: 100%;
+  width: 90%;
   padding: 6px;
   border: 1px solid #ccc;
+}
+
+.input-error {
+  border-color: red;
 }
 
 .btn {
@@ -56,3 +44,6 @@ body {
   border: none;
 }
 
+select[multiple] {
+  height: 80px;
+}

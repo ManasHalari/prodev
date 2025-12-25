@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { initialColumns, initialRows } from "./models/schema";
+import Cell from "./components/Cell";
 
 
 export default function App() {
@@ -30,7 +31,7 @@ export default function App() {
       >
         Add Row
       </button>
-    <table border="1" cellPadding="8">
+    <table className="table" border="1" cellPadding="8">
       <thead>
         <tr>
           {columns.map(col => (
@@ -44,12 +45,17 @@ export default function App() {
           <tr key={row.id}>
             {columns.map(col => (
               <td key={col.id}>
-                <input
-                  value={row.cells[col.id] || ""}
-                  onChange={e =>
-                    updateCell(row.id, col.id, e.target.value)
-                  }
-                />
+                  <Cell
+                    column={col}
+                    value={row.cells[col.id]}
+                    onChange={e =>
+                          updateCell(
+                            row.id,
+                            col.id,
+                            e.target?.value ?? e
+                          )
+                    }
+                  />
               </td>
             ))}
               <td>
