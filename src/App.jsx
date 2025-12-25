@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { initialColumns, initialRows } from "./models/schema";
 
+
 export default function App() {
   const [columns] = useState(initialColumns);
 
@@ -17,6 +18,18 @@ export default function App() {
   };
 
   return (
+    <>
+      <button
+        className="btn btn-primary"
+        onClick={() =>
+          setRows(prev => [
+            ...prev,
+            { id: Date.now(), cells: {} }
+          ])
+        }
+      >
+        Add Row
+      </button>
     <table border="1" cellPadding="8">
       <thead>
         <tr>
@@ -39,9 +52,22 @@ export default function App() {
                 />
               </td>
             ))}
+              <td>
+                <button
+                  className="btn btn-danger"
+                  onClick={() =>
+                    setRows(prev =>
+                      prev.filter(r => r.id !== row.id)
+                    )
+                  }
+                >
+                  Delete
+                </button>
+              </td>
           </tr>
         ))}
       </tbody>
     </table>
+    </>
   );
 }
