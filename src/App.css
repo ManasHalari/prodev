@@ -48,23 +48,94 @@ select[multiple] {
   height: 80px;
 }
 
+.select-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px; /* space between select and chips */
+}
+
 .chip-container {
   display: flex;
-  gap: 6px;
   flex-wrap: wrap;
+  gap: 6px;
+  padding-top: 4px; /* extra spacing from select */
 }
 
 .chip {
-  background: #e5e7eb;
-  padding: 4px 8px;
-  border-radius: 12px;
+  background: #e0e7ff; /* soft blue */
+  color: #1e3a8a; /* darker text */
+  padding: 4px 10px;
+  border-radius: 16px;
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .chip-close {
   cursor: pointer;
   font-weight: bold;
+  color: #374151;
+}
+
+.mt-2 {
+  margin-top: 6px;
+}
+
+.action-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  justify-content: flex-start;
+}
+
+.header-plus {
+  width: 22px;
+  height: 22px;
+  font-size: 16px;
+  line-height: 1;
+  padding: 0;
+  border-radius: 4px;
+  border: none;
+  background: #2563eb;
+  color: white;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.header-plus:hover {
+  background: #1e40af;
+}
+
+.menu-item {
+  padding: 6px 10px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.menu-item:hover {
+  background: #f3f4f6;
+}
+
+.notion-add {
+  position: relative;
+}
+
+.notion-menu {
+  position: absolute;
+  top: 26px;
+  left: 0;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  width: 200px;
+  z-index: 20;
+  padding: 6px 0;
+}
+
+.menu-section {
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #6b7280;
 }
