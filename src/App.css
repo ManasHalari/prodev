@@ -47,3 +47,24 @@ body {
 select[multiple] {
   height: 80px;
 }
+
+.chip-container {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.chip {
+  background: #e5e7eb;
+  padding: 4px 8px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+}
+
+.chip-close {
+  cursor: pointer;
+  font-weight: bold;
+}
