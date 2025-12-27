@@ -1,7 +1,5 @@
-
 export default function Cell({ column, value, onChange }) {
   switch (column.type) {
-
     case "email":
       return (
         <input
@@ -41,91 +39,90 @@ export default function Cell({ column, value, onChange }) {
         />
       );
 
-case "select": {
-  let selectedOption = column.options.find(opt => opt.id === value);
+    case "select": {
+      let selectedOption = column.options?.find(opt => opt.id === value);
 
-  return (
-    <div className="select-wrapper">
-      <select
-        className="input"
-        value={value || ""}
-        onChange={e => onChange(e.target.value || null)}
-      >
-        <option value="">Select</option>
-        {column.options.map(opt => (
-          <option key={opt.id} value={opt.id}>
-            {opt.label}
-          </option>
-        ))}
-      </select>
+      return (
+        <div className="select-wrapper">
+          <select
+            className="input"
+            value={value || ""}
+            onChange={e => onChange(e.target.value || null)}
+          >
+            <option value="">Select</option>
+            {(column.options || []).map(opt => (
+              <option key={opt.id} value={opt.id}>
+                {opt.label}
+              </option>
+            ))}
+          </select>
 
-      {value && selectedOption && (
-        <div className="chip-container mt-2">
-          <div className="chip">
-            {selectedOption.label}
-            <span
-              className="chip-close"
-              onClick={e => {
-                e.stopPropagation();
-                onChange(() => {
-                  selectedOption = null;
-                });
-              }}
-            >
-              ×
-            </span>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
-
-case "multi-select": {
-  const selectedValues = value || [];
-
-  return (
-    <div className="select-wrapper">
-      <select
-        className="input"
-        onChange={e => {
-          const selected = column.options.find(
-            opt => opt.id === e.target.value
-          );
-          if (selected && !selectedValues.some(v => v.id === selected.id)) {
-            onChange([...selectedValues, selected]);
-          }
-        }}
-      >
-        <option value="">Add item</option>
-        {column.options.map(opt => (
-          <option key={opt.id} value={opt.id}>
-            {opt.label}
-          </option>
-        ))}
-      </select>
-
-      {selectedValues.length > 0 && (
-        <div className="chip-container mt-2">
-          {selectedValues.map(item => (
-            <div key={item.id} className="chip">
-              {item.label}
-              <span
-                className="chip-close"
-                onClick={() =>
-                  onChange(selectedValues.filter(v => v.id !== item.id))
-                }
-              >
-                ×
-              </span>
+          {value && selectedOption && (
+            <div className="chip-container mt-2">
+              <div className="chip">
+                {selectedOption.label}
+                <span
+                  className="chip-close"
+                  onClick={e => {
+                    e.stopPropagation();
+                    onChange(null);
+                  }}
+                >
+                  ×
+                </span>
+              </div>
             </div>
-          ))}
+          )}
         </div>
-      )}
-    </div>
-  );
-}
+      );
+    }
 
+    case "multi-select": {
+      const selectedValues = value || [];
+
+      return (
+        <div className="select-wrapper">
+          <select
+            className="input"
+            onChange={e => {
+              const selected = column.options?.find(
+                opt => opt.id === e.target.value
+              );
+              if (selected && !selectedValues.some(v => v.id === selected.id)) {
+                onChange([...selectedValues, selected]);
+              }
+              e.target.value = ""; // Reset select
+            }}
+            value=""
+          >
+            <option value="">Add item</option>
+            {(column.options || []).map(opt => (
+              <option key={opt.id} value={opt.id}>
+                {opt.label}
+              </option>
+            ))}
+          </select>
+
+          {selectedValues.length > 0 && (
+            <div className="chip-container mt-2">
+              {selectedValues.map(item => (
+                <div key={item.id} className="chip">
+                  {item.label}
+                  <span
+                    className="chip-close"
+                    onClick={() =>
+                      onChange(selectedValues.filter(v => v.id !== item.id))
+                    }
+                  >
+                    ×
+                  </span>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      );
+    }
 
     default:
       return (
